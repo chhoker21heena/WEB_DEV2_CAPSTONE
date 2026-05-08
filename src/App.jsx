@@ -26,11 +26,23 @@ function App() {
         `/top-headlines?country=us&pageSize=6&page=${page}&apiKey=509fd137ff324f6c97640893f6bc3ce0`
       );
 
-      if (page === 1) {
-        setNewsData(response.data.articles);
-      } else {
-        setNewsData((prev) => [...prev, ...response.data.articles]);
-      }
+     
+  setNewsData([
+     {
+      title: "UPSC Current Affairs",
+      description: "India economy and international relations updates.",
+      urlToImage: "https://via.placeholder.com/300",
+      url: "https://example.com"
+      },
+    {
+      title: "Parliament Session Updates",
+      description: "Important bills and governance news.",
+      urlToImage: "https://via.placeholder.com/300",
+      url: "https://example.com"
+    }
+    ]);
+        
+     
     } catch (error) {
       console.log("error fetching news");
     }
