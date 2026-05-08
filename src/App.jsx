@@ -49,6 +49,7 @@ function App() {
 
     setLoading(false);
   };
+  
 
   const addToFavorites = (item) => {
     setFavorites([...favorites, item]);
