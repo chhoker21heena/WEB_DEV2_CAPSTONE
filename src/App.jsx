@@ -49,7 +49,7 @@ function App() {
 
     setLoading(false);
   };
-  
+
 
   const addToFavorites = (item) => {
     setFavorites([...favorites, item]);
@@ -94,19 +94,15 @@ function App() {
           Total Favorites: {favorites.length}
         </p>
 
-        {loading ? (
-          <Loader />
-        ) : (
-          filteredNews.map((item, index) => (
-            <NewsCard
-              key={index}
-              image={item.urlToImage}
-              title={item.title}
-              description={item.description}
-              addToFavorites={() => addToFavorites(item)}
-            />
-          ))
-        )}
+       <div>
+           <h2>UPSC Current Affairs</h2>
+           <p>India economy and international relations updates.</p>
+           <img src="https://via.placeholder.com/300" />
+
+           <h2>Parliament Session Updates</h2>
+           <p>Important bills and governance news.</p>
+           <img src="https://via.placeholder.com/300" />
+       </div>
 
         <button
           onClick={() => setPage(page + 1)}
