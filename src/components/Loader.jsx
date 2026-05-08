@@ -1,4 +1,4 @@
-
+// src/components/Loader.jsx
 
 function Loader() {
   return (

@@ -1,10 +1,10 @@
 
+
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import NewsCard from "./components/NewsCard";
 import Loader from "./components/Loader";
-import api from "./services/api"; 
-
+import api from "./services/api";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -23,33 +23,21 @@ function App() {
 
     try {
       const response = await api.get(
-        `/top-headlines?country=us&pageSize=6&page=${page}&apiKey=509fd137ff324f6c97640893f6bc3ce0`
+        "https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=in&max=10&apikey=743c8857b9ca0a824106249435ba25d5"
+       
       );
 
-     
-  setNewsData([
-     {
-      title: "UPSC Current Affairs",
-      description: "India economy and international relations updates.",
-      urlToImage: "https://via.placeholder.com/300",
-      url: "https://example.com"
-      },
-    {
-      title: "Parliament Session Updates",
-      description: "Important bills and governance news.",
-      urlToImage: "https://via.placeholder.com/300",
-      url: "https://example.com"
-    }
-    ]);
-        
-     
+      if (page === 1) {
+        setNewsData(response.data.articles);
+      } else {
+        setNewsData((prev) => [...prev, ...response.data.articles]);
+      }
     } catch (error) {
       console.log("error fetching news");
     }
 
     setLoading(false);
   };
-
 
   const addToFavorites = (item) => {
     setFavorites([...favorites, item]);
@@ -93,16 +81,26 @@ function App() {
         <p style={{ marginTop: "15px" }}>
           Total Favorites: {favorites.length}
         </p>
-
-       <div>
-           <h2>UPSC Current Affairs</h2>
-           <p>India economy and international relations updates.</p>
-           <img src="https://via.placeholder.com/300" />
-
-           <h2>Parliament Session Updates</h2>
-           <p>Important bills and governance news.</p>
-           <img src="https://via.placeholder.com/300" />
-       </div>
+        {[
+  {
+    title: "UPSC Current Affairs",
+    description: "India economy and international relations updates.",
+    image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a"
+  },
+  {
+    title: "Parliament Session Updates",
+    description: "Important bills and governance news.",
+    image: "https://images.unsplash.com/photo-1495020689067-958852a7765e"
+  }
+].map((item, index) => (
+  <NewsCard
+    key={index}
+    image={item.image}
+    title={item.title}
+    description={item.description}
+    addToFavorites={() => addToFavorites(item)}
+  />
+))}
 
         <button
           onClick={() => setPage(page + 1)}

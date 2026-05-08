@@ -1,4 +1,4 @@
-
+// src/components/NewsCard.jsx
 
 function NewsCard(props) {
   return (
